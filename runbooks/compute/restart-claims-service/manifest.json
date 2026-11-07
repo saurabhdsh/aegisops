@@ -1,0 +1,13 @@
+{
+  "slug": "restart-claims-service",
+  "version": "1.0.0",
+  "name": "Restart Claims API and add one node",
+  "description": "Record a controlled restart of claims-api and one added node inside the execution sandbox.",
+  "target_class": "cmdb_ci_linux_server",
+  "risk": "medium",
+  "rollback_defined": true,
+  "parameters": {
+    "service_name": {"type": "string", "enum": ["claims-api"]},
+    "node_count": {"type": "string", "enum": ["1"]}
+  }
+}

@@ -1,0 +1,135 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #0c0d10;
+  --bg-elev: #14161b;
+  --bg-muted: #1b1e25;
+  --bg-raised: #22262f;
+  --line: rgba(232, 234, 237, 0.1);
+  --line-soft: rgba(232, 234, 237, 0.06);
+  --ink: #e7e8ea;
+  --ink-muted: #8d939d;
+  --ink-faint: #6a707a;
+  --violet: #7c5cff;
+  --violet-soft: rgba(124, 92, 255, 0.16);
+  --amber: #e2a33a;
+  --cyan: #6fbfc9;
+  --coral: #e07a6a;
+  --mint: #7dcea0;
+  --titanium: #c5c8ce;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Instrument Sans", "Segoe UI", sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+}
+
+::selection {
+  background: var(--violet-soft);
+  color: var(--ink);
+}
+
+em,
+i {
+  font-style: normal;
+}
+
+h1,
+h2,
+h3 {
+  letter-spacing: -0.022em;
+  font-weight: 600;
+}
+
+button,
+input {
+  font-family: inherit;
+}
+
+.mono {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+.hairline {
+  border: 1px solid var(--line);
+}
+
+.glass {
+  background: rgba(20, 22, 27, 0.82);
+  backdrop-filter: blur(20px) saturate(160%);
+}
+
+.card {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--bg-elev);
+  box-shadow: var(--shadow-sm);
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 3px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--violet);
+  outline-offset: 2px;
+}
+
+@keyframes capacity-draw {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+
+.capacity-draw {
+  stroke-dasharray: 1;
+  animation: capacity-draw 1.15s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.capacity-page {
+  container-name: capacity;
+  container-type: inline-size;
+  min-width: 0;
+  max-width: 100%;
+}
+
+@container capacity (max-width: 420px) {
+  .capacity-ring {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

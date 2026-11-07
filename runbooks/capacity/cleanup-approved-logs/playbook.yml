@@ -1,0 +1,32 @@
+- name: Purge aged claims database logs and extend the volume inside the sandbox
+  hosts: target
+  gather_facts: false
+  tasks:
+    - name: Precheck the retention floor
+      ansible.builtin.debug:
+        msg: "precheck min_age_days={{ min_age_days }}"
+      when: "precheck"
+    - name: Precheck the log directory
+      ansible.builtin.stat:
+        path: "{{ sandbox_dir }}/logs"
+      when: "precheck"
+    - name: Delete aged log files in the approved directory
+      aegisops.safe.cleanup_aged_logs:
+        directory: "{{ sandbox_dir }}/logs"
+        min_age_days: "{{ min_age_days }}"
+        name_suffix: ".log"
+      when: "execute"
+    - name: Record the volume extension
+      aegisops.safe.record_extension:
+        dest: "{{ sandbox_dir }}/volume.extended"
+        content: "extended 1 volume\n"
+      when: "execute"
+    - name: Post-check the extension marker
+      ansible.builtin.stat:
+        path: "{{ sandbox_dir }}/volume.extended"
+      when: "execute"
+    - name: Record rollback of the volume extension
+      ansible.builtin.copy:
+        dest: "{{ sandbox_dir }}/volume.rollback"
+        content: "extension rolled back\n"
+      when: "rollback"

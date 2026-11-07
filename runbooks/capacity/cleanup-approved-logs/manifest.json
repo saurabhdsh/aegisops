@@ -1,0 +1,12 @@
+{
+  "slug": "cleanup-approved-logs",
+  "version": "1.0.0",
+  "name": "Purge logs older than seven days and extend the volume",
+  "description": "Delete only .log files older than the seven-day retention floor, then record a one-step volume extension. Both steps stay inside the sandbox.",
+  "target_class": "cmdb_ci_linux_server",
+  "risk": "medium",
+  "rollback_defined": true,
+  "parameters": {
+    "min_age_days": {"type": "number", "minimum": 7}
+  }
+}

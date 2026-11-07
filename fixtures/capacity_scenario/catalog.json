@@ -1,0 +1,60 @@
+{
+  "host": {
+    "external_id": "ci-claims-db-01",
+    "name": "claims-db-01",
+    "class": "cmdb_ci_linux_server",
+    "environment": "production",
+    "criticality": "tier-1",
+    "entity_id": "HOST-CLAIMS-DB-01",
+    "business_service": {
+      "external_id": "svc-claims",
+      "name": "Claims",
+      "criticality": "tier-1"
+    }
+  },
+  "disk_series": [
+    {"timestamp": "2026-11-07T02:00:00Z", "value": 64, "unit": "percent"},
+    {"timestamp": "2026-11-07T03:00:00Z", "value": 68, "unit": "percent"},
+    {"timestamp": "2026-11-07T04:00:00Z", "value": 72, "unit": "percent"},
+    {"timestamp": "2026-11-07T05:00:00Z", "value": 76, "unit": "percent"},
+    {"timestamp": "2026-11-07T06:00:00Z", "value": 80, "unit": "percent"}
+  ],
+  "log_share_of_disk": 0.3,
+  "retention_days": 7,
+  "legal_hold": false,
+  "archive_required": false,
+  "storage_extension_supported": true,
+  "free_pool_gb": 100,
+  "alert_count": 50,
+  "symptom": "disk-utilization",
+  "service_healthy": true,
+  "forecast_event": {
+    "id": "forecast-claims-db-01",
+    "message": "Disk utilization on claims-db-01 is forecast to exhaust within six hours"
+  },
+  "changes": [
+    {
+      "number": "CHG009880",
+      "summary": "Claims database backup window extended",
+      "state": "closed",
+      "opened_at": "2026-11-06T22:00:00Z"
+    }
+  ],
+  "similar_fixes": [
+    {
+      "number": "CHG009102",
+      "summary": "Purged claims database logs older than seven days and extended the volume",
+      "state": "closed"
+    },
+    {
+      "number": "CHG008774",
+      "summary": "Purged aged logs on claims-db-01 after a four-point-per-hour climb",
+      "state": "closed"
+    },
+    {
+      "number": "CHG008221",
+      "summary": "Extended the claims data volume before exhaustion",
+      "state": "closed"
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aegisops"
+version = "0.1.0"
+description = "AegisOps — enterprise agentic SRE and autonomous operations platform"
+readme = "HOW TO USE.md"
+requires-python = ">=3.12"
+dependencies = [
+  "fastapi>=0.115",
+  "uvicorn>=0.32",
+  "sqlalchemy>=2.0.36",
+  "alembic>=1.14",
+  "pydantic>=2.10",
+  "pydantic-settings>=2.6",
+  "httpx>=0.28",
+  "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.3",
+  "pytest-asyncio>=0.24",
+]
+
+[tool.setuptools]
+packages = [
+  "aegisops",
+  "aegisops.core",
+  "aegisops.contracts",
+  "aegisops.runtime",
+  "aegisops.agents",
+  "aegisops.connectors",
+  "aegisops.connectors.servicenow",
+  "aegisops.connectors.dynatrace",
+  "aegisops.connectors.ansible",
+  "aegisops.connectors.llm",
+  "aegisops.policy",
+  "aegisops.persistence",
+  "aegisops.persistence.repositories",
+  "aegisops.observability",
+  "apps",
+  "apps.api",
+  "apps.api.middleware",
+  "apps.api.routers",
+  "apps.api.schemas",
+  "workers",
+]
+
+[tool.setuptools.package-dir]
+"aegisops" = "packages/aegisops"
+"aegisops.core" = "packages/core"
+"aegisops.contracts" = "packages/contracts"
+"aegisops.runtime" = "packages/runtime"
+"aegisops.agents" = "packages/agents"
+"aegisops.connectors" = "packages/connectors"
+"aegisops.connectors.servicenow" = "packages/connectors/servicenow"
+"aegisops.connectors.dynatrace" = "packages/connectors/dynatrace"
+"aegisops.connectors.ansible" = "packages/connectors/ansible"
+"aegisops.connectors.llm" = "packages/connectors/llm"
+"aegisops.policy" = "packages/policy"
+"aegisops.persistence" = "packages/persistence"
+"aegisops.persistence.repositories" = "packages/persistence/repositories"
+"aegisops.observability" = "packages/observability"
+"apps" = "apps"
+"apps.api" = "apps/api"
+"apps.api.middleware" = "apps/api/middleware"
+"apps.api.routers" = "apps/api/routers"
+"apps.api.schemas" = "apps/api/schemas"
+"workers" = "workers"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+asyncio_mode = "auto"
+filterwarnings = ["ignore::DeprecationWarning"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"

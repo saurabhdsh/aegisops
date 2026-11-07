@@ -1,0 +1,23 @@
+- name: Restart claims-api and record one added node inside the sandbox
+  hosts: target
+  gather_facts: false
+  tasks:
+    - name: Precheck the service and node count
+      ansible.builtin.debug:
+        msg: "precheck {{ service_name }} nodes={{ node_count }}"
+      when: "precheck"
+    - name: Record the restart marker
+      ansible.builtin.copy:
+        dest: "{{ sandbox_dir }}/{{ service_name }}.restarted"
+        content: "restarted\n"
+      when: "execute"
+    - name: Record one added node
+      ansible.builtin.copy:
+        dest: "{{ sandbox_dir }}/{{ service_name }}.node"
+        content: "added 1 node\n"
+      when: "execute"
+    - name: Record the rollback marker
+      ansible.builtin.copy:
+        dest: "{{ sandbox_dir }}/{{ service_name }}.rollback"
+        content: "rolled-back\n"
+      when: "rollback"
